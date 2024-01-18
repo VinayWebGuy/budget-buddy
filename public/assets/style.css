@@ -5,6 +5,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', 'sans-serif';
 }
+:root {
+    --clr1: #6e082a;
+}
 body {
     position: relative;
     min-height: 100vh;
@@ -32,7 +35,7 @@ body {
 }
 .form_banner h2 {
     font-size: 2.2rem;
-    color: #6e082a;
+    color: var(--clr1);
 }
 .form_banner img {
     width: 300px;
@@ -48,7 +51,7 @@ body {
 .form_banner p.tagline {
     font-weight: 700;
     font-size: 1.6rem;
-    color: #6e082a;
+    color: var(--clr1);
 }
 
 .form_box .form {
@@ -65,12 +68,12 @@ body {
 }
 .form_group {
     width: 100%;
-    border: 2px solid #6e082a;
+    border: 2px solid var(--clr1);
     margin: 20px 0;
     position: relative;
     padding: 15px;
 }
-.form_group input {
+.form_group input, .form_group select, .form_group textarea {
     width: 100%;
     outline: none;
     border: none;
@@ -78,34 +81,35 @@ body {
     font-size: 1rem;
     font-weight: 600;
 }
+textarea {
+    resize: none;
+}
 .form_group label {
     position: absolute;
     left: 10px;
     top: -15px;
     background: #fff;
-    padding: 4px 7px;
-    color: #6e082a;
+    padding: 3px 7px;
+    color: var(--clr1);
     font-weight: 600;
 }
-.form button {
+button {
     display: inline-block;
     margin-bottom: 5px;
     padding: 4px 7px;
     background: transparent;
-    font-weight: 600;
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: #6e082a;
+    background-color: var(--clr1);
     color: #fff;
     font-size: 1rem;
-    letter-spacing: .1rem;
     border-radius: 7px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .7);
 }
 .single-link a{
     text-decoration: none;
-    color: #6e082a;
+    color: var(--clr1);
     font-weight: 800;
 }
 input::-webkit-outer-spin-button,
@@ -148,7 +152,7 @@ main aside {
     height: 100vh;
     position: sticky;
     top: 0;
-    background-color: #6e082a;
+    background-color: var(--clr1);
     transition: .15s linear;
     padding: 0 30px;
     color: #fff;
@@ -164,7 +168,7 @@ main aside .logo {
     min-height: 80px;
     position: sticky;
     top: 0;
-    background-color: #6e082a;
+    background-color: var(--clr1);
     font-weight: 800;
 }
 main aside::-webkit-scrollbar {
@@ -215,12 +219,16 @@ main section header {
     padding: 0 30px;
     color: #fff;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, .7);
-    background-color: #6e082a;
+    background-color: var(--clr1);
     justify-content: space-between;
+    z-index: 20;
 }
 main section header .header-icons {
     display: flex;
     gap: 30px;
+}
+main section header .header-icons a {
+   color: #fff;
 }
 
 main section header .header-icons i{
@@ -235,14 +243,35 @@ main section header .header-icons > div{
     width: 250px;
     background-color: #fff;
     box-shadow: 0px 0px 4px  rgba(0, 0, 0, .7);
-    padding: 8px;
     top: 40px;
     right: 5px;
     height: 330px;
     display: none;
-    /* overflow: hidden; */
+    color: #000;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
+.header-icon-box h4 {
+    background: var(--clr1);
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+}
+.single-notificiation {
+    padding: 4px 6px;
+    display: flex;
+    font-size: .9rem;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.single-notificiation:hover {
+   font-weight: 600;
+}
+.header-icon-box .view-all {
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+}
 
 .header-icon-box.active {
     display: block;
@@ -290,10 +319,11 @@ main section header .header-icons > div{
 /* Content */
 .content {
     padding: 40px;
+    position: relative;
 }
 .content .page-heading {
     font-size: 1.5rem;
-    color: #6e082a;
+    color: var(--clr1);
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -305,4 +335,231 @@ main section header .header-icons > div{
 }
 .content .page-heading span i {
     margin: 0 5px;
+}
+
+/* Category */
+.working-area {
+    width: 100%;
+    min-height: 350px;
+    margin-top: 30px;
+}
+.working-area .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.head span {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.head-action {
+    padding: 5px 7px;
+    background-color: var(--clr1);
+    color: #fff;
+    cursor: pointer;
+    font-size: .9rem;
+    border-radius: 5px;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, .7);
+}
+.body {
+    width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 13px;
+}
+th, td {
+    padding: 8px 12px; 
+    border: 1px solid #ddd; 
+    text-align: left; 
+    font-size: .9rem;
+    font-weight: 600;
+}
+th {
+    background-color: var(--clr1); 
+    color: #fff; 
+}
+td a {
+    text-decoration: none;
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+a.active {
+    background-color: var(--clr1);
+}
+a.inactive {
+    background: #f00;
+}
+
+.backdrop {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff30;
+    inset: 0;
+    z-index: 99;
+    display: none;
+}
+.backdrop.active {
+    display: block;
+}
+.modal, .modal2 {
+    width: 400px;
+    min-height: 200px;
+    background-color: #fff;
+    border-radius: 7px;
+    z-index: 100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    display: none;
+}
+.modal.active, .modal2.active {
+    display: block;
+}
+.modal-heading {
+    width: 100%;
+    height: 50px;
+    background: var(--clr1);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.modal-body {
+    padding: 10px 20px;
+}
+.modal-heading .close-modal {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    cursor: pointer;
+    font-size: .9rem;
+}
+.close-modal i {
+    color: #fff;
+}
+
+/* Budget */
+.total-budget-bar {
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    margin-top: 20px;
+    border: 1px solid var(--clr1);
+    position: relative;
+}
+.consumed-budget-bar {
+    height: 100%;
+    background-color: var(--clr1);
+    width: calc(var(--consumedBudget) / var(--totalBudget) * 100%);
+    position: relative;
+}
+.consumed-budget-bar::before {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    height: 1px;
+    width: 100%;
+    background-color: var(--clr1);
+}
+.consumed-budget-bar::after {
+    content: "Consumed Budget";
+    position: absolute;
+    bottom: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3px 5px;
+    color: var(--clr1);
+    background-color: #fff;
+    z-index: 9;
+    font-weight: 600;
+    font-size: .8rem;
+}
+.total-budget-bar::before {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    height: 1px;
+    width: 100%;
+    background-color: #000;
+}
+.total-budget-bar::after {
+    content: "Total Budget";
+    position: absolute;
+    bottom: -62px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3px 5px;
+    color: #000;
+    background-color: #fff;
+    z-index: 9;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+
+#incomeExpenseChart {
+    width:100%;
+    max-width:600px;
+    margin-top: 85px;
+}
+.pie-chart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    gap: 20px;
+}
+.incomeRange, .expenseRange, .overallRange {
+    display: none;
+}
+.incomeRange.active, .expenseRange.active, .overallRange.active {
+    display: flex;
+}
+.single-report {
+    box-shadow: 0 0 7px rgba(0, 0, 0, .7);
+    border-radius: 7px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.small-text {
+    font-size: .9rem;
+}
+.table-action {
+    background: transparent;
+    box-shadow: none;
+    color: var(--clr1);
+    padding: 3px;
+    font-size: 1.1rem;
+}
+.table-action:nth-child(2) {
+    background: transparent;
+    color: #f00;
+}
+.dashboard-recent {
+    margin-top: 85px;
+}
+.dashboard-recent > div {
+    width: 100%;
+}
+.view-all {
+    width: 100%;
+    padding: 4px 0;
+    text-decoration: none;
+    background: var(--clr1);
+    color: #fff;
+    text-align: center;
+    display: block;
 }

@@ -21,7 +21,7 @@
             <li class="@yield('report')"><a href="{{url('report')}}"><i class="fa-solid fa-file"></i> <span>Report</span></a></li>
             <li class="@yield('account')"><a href="{{url('account')}}"><i class="fa-solid fa-gears"></i> <span>Account</span></a></li>
             <li class="@yield('security')"><a href="{{url('security')}}"><i class="fa-solid fa-shield-halved"></i> <span>Security</span></a></li>
-            <li class="@yield('wallet')"><a href="{{url('wallet')}}"><i class="fa-solid fa-wallet"></i><span> BB Wallet</span></a></li>
+            <li class="@yield('bb_club')"><a href="{{url('bb-club')}}"><i class="fa-solid fa-wallet"></i><span> BB Club</span></a></li>
             <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a></li>
         </ul>
         <div class="version"><i class="fa-solid fa-code-fork"></i> <span>version 1.02</span></div>
@@ -34,15 +34,21 @@
             <div class="header-icons">
                 <div class="notification-header">
                     <i class="fa-solid fa-bell"></i>
-                    <div class="header-icon-box"></div>
+                    <div class="header-icon-box">
+                        <h4>Recent Notifications</h4>
+                        <div class="single-notificiation"><span>New Expense Added.</span></div>
+                        <div class="single-notificiation"><span>New Income Added.</span></div>
+                        <div class="single-notificiation"><span>Your monthly expense crossed 70% of your budget.</span></div>
+                        <div class="single-notificiation"><span>New Expense Added.</span></div>
+                        <div class="single-notificiation"><span>Your monthly expense crossed 50% of your budget.</span></div>
+                        <a href="#" class="view-all">View All <i class="fa fa-arrow-right"></i></a>
+                    </div>
                 </div>
                <div class="settings-header">
-                <i class="fa-solid fa-cog"></i>
-                <div class="header-icon-box"></div>
+                <a href="{{url('account')}}"><i class="fa-solid fa-cog"></i></a> 
                </div>
                 <div class="profile-header">
-                    <i class="fa-solid fa-user"></i>   
-                    <div class="header-icon-box"></div> 
+                    <a href="{{url('profile')}}"><i class="fa-solid fa-user"></i>   </a>
                 </div>
             </div>
         </header>

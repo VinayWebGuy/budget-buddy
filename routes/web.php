@@ -23,6 +23,7 @@ Route::get('budget', [HomeController::class, 'budget']);
 Route::get('report', [HomeController::class, 'report']);
 Route::get('account', [HomeController::class, 'account']);
 Route::get('security', [HomeController::class, 'security']);
-Route::get('wallet', [HomeController::class, 'wallet']);
+Route::get('profile', [HomeController::class, 'profile']);
+Route::get('bb-club', [HomeController::class, 'bb_club']);
 Route::get('register', [HomeController::class, 'register']);
 Route::get('login', [HomeController::class, 'login']);

@@ -1,34 +1,31 @@
 @extends('layouts.main')
-@section('title', 'Expense')
-@section('expense', 'active')
+@section('title', 'BB Club')
+@section('bb_club', 'active')
 @section('content')
     <div class="content">
-        <h2 class="page-heading">Expense<span>Main <i class="fa fa-chevron-right"></i> Expense</span></h2>
+        <h2 class="page-heading">BB Club<span>Main <i class="fa fa-chevron-right"></i> BB Club</span></h2>
+        <p class="small-text">BB Club facilitates easy self-transfers, converting online balance to cash and vice versa. It serves as a record for transferring funds between accounts or exchanging cash with others. Use BB Club to log transactions when giving or receiving cash in various scenarios.</p>
 
         <div class="working-area">
             <div class="head">
-                <span>Total Expense</span>
-                <div class="head-action">Add Expense +</div>
+                <span>Recent Entries</span>
+                <div class="head-action">Add Entry +</div>
             </div>
             <div class="body">
                 <table>
                     <thead>
                         <th>ID</th>
                         <th>Amount</th>
-                        <th>Category</th>
+                        <th>Type</th>
                         <th>Remarks</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><span>₹</span> 300</td>
-                            <td>Food</td>
-                            <td>Momos</td>
-                            <td>
-                                <a class="active" href="#">Active</a>
-                            </td>
+                            <td>300</td>
+                            <td>SAC</td>
+                            <td>Aman</td>
                             <td>
                                 <a class="table-action edit-data" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                                 <a class="table-action" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
@@ -36,12 +33,9 @@
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><span>₹</span> 1700</td>
-                            <td>Travel</td>
-                            <td></td>
-                            <td>
-                                <a class="inactive" href="#">Inactive</a>
-                            </td>
+                            <td>12000</td>
+                            <td>AAC</td>
+                            <td>Preet</td>
                             <td>
                                 <a class="table-action edit-data" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                                 <a class="table-action" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
@@ -53,7 +47,7 @@
         </div>
         <div class="backdrop"></div>
         <div class="modal">
-            <div class="modal-heading">Add Expense
+            <div class="modal-heading">Add Entry
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
@@ -63,24 +57,15 @@
                         <input type="number" id="amount" name="amount">
                     </div>
                     <div class="form_group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" name="date">
-                    </div>
-                    <div class="form_group">
-                        <label for="category">Category</label>
-                        <select name="category" id="category">
+                        <label for="type">Payment Type</label>
+                        <select name="type" id="type">
                             <option hidden value=""></option>
-                            <option value="Food">Food</option>
-                            <option value="Travel">Travel</option>
-                        </select>
-                    </div>
-                    <div class="form_group">
-                        <label for="method">Payment Method</label>
-                        <select name="method" id="method">
-                            <option hidden value=""></option>
-                            <option value="Cash">Cash</option>
-                            <option value="UPI">UPI</option>
-                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="SAA">Self Account to Account (SAA)</option>
+                            <option value="SAC">Self Account to Cash (SAC)</option>
+                            <option value="SCC">Self Cash to Cash (SCC)</option>
+                            <option value="SCA">Self Cash to Account (SCA)</option>
+                            <option value="ACA">Another Cash to Account (ACA)</option>
+                            <option value="AAC">Another Account to Cash (AAC)</option>
                         </select>
                     </div>
                     <div class="form_group">
@@ -92,7 +77,7 @@
             </div>
         </div>
         <div class="modal2">
-            <div class="modal-heading">Edit Expense
+            <div class="modal-heading">Edit Entry
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
@@ -102,24 +87,15 @@
                         <input type="number" id="amount" name="amount">
                     </div>
                     <div class="form_group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" name="date">
-                    </div>
-                    <div class="form_group">
-                        <label for="category">Category</label>
-                        <select name="category" id="category">
+                        <label for="type">Payment Type</label>
+                        <select name="type" id="type">
                             <option hidden value=""></option>
-                            <option value="Food">Food</option>
-                            <option value="Travel">Travel</option>
-                        </select>
-                    </div>
-                    <div class="form_group">
-                        <label for="method">Payment Method</label>
-                        <select name="method" id="method">
-                            <option hidden value=""></option>
-                            <option value="Cash">Cash</option>
-                            <option value="UPI">UPI</option>
-                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="SAA">Self Account to Account (SAA)</option>
+                            <option value="SAC">Self Account to Cash (SAC)</option>
+                            <option value="SCC">Self Cash to Cash (SCC)</option>
+                            <option value="SCA">Self Cash to Account (SCA)</option>
+                            <option value="ACA">Another Cash to Account (ACA)</option>
+                            <option value="AAC">Another Account to Cash (AAC)</option>
                         </select>
                     </div>
                     <div class="form_group">

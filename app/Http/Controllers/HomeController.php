@@ -36,7 +36,10 @@ class HomeController extends Controller
     public function security() {
         return view('security');
     }
-    public function wallet() {
-        return view('wallet');
+    public function profile() {
+        return view('profile');
+    }
+    public function bb_club() {
+        return view('bb_club');
     }
 }

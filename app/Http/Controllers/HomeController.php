@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+
+use Session;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
     public function register() {
         return view('register');
     }
@@ -16,7 +21,9 @@ class HomeController extends Controller
         return view('index');
     }
     public function category() {
-        return view('category');
+        
+        $category = Category::where('user_id', Session::get('user_id'))->orderBy('name', 'asc')->paginate(10);
+        return view('category', compact('category'));
     }
     public function income() {
         return view('income');
@@ -42,4 +49,14 @@ class HomeController extends Controller
     public function bb_club() {
         return view('bb_club');
     }
+    public function logout() {
+        Session::forget('user_id');
+        Session::forget('name');
+        Session::forget('email');
+        Session::forget('mobile');
+        Session::forget('session_id');
+        return redirect('login');
+    }
+
+
 }

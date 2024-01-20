@@ -13,36 +13,38 @@
             <div class="body">
                 <table>
                     <thead>
-                        <th>ID</th>
                         <th>Name</th>
+                        <th>Slug</th>
                         <th>Status</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
+                        @if(count($category) > 0)
+                        @foreach ($category as $c)     
                         <tr>
-                            <td>1</td>
-                            <td>Food</td>
+                            <td>{{$c->name}}</td>
+                            <td>{{$c->slug}}</td>
                             <td>
-                                <a class="active" href="#">Active</a>
+                                @if($c->status == 1)
+                                <a class="active" href="{{url('category/status/0')}}/{{$c->id}}">Active</a>
+                                @else
+                                <a class="inactive" href="{{url('category/status/1')}}/{{$c->id}}">Inactive</a>
+                                @endif
                             </td>
                             <td>
-                                <a class="table-action edit-data" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
-                                <a class="table-action" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
+                                <a data-name="{{$c->name}}" data-id="{{$c->id}}" class="table-action edit-category" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                                <a data-id="{{$c->id}}" class="table-action delete-data" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Travel</td>
-                            <td>
-                                <a class="inactive" href="#">Inactive</a>
-                            </td>
-                            <td>
-                                <a class="table-action edit-data" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
-                                <a class="table-action" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
+                        @endforeach
+                        @else
+                            <tr>
+                                <td colspan="4" class="center">No Category Found</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
+                {{ $category->links('vendor.pagination.custom-pagination') }}
             </div>
         </div>
         <div class="backdrop"></div>
@@ -51,7 +53,7 @@
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="" id="addCategoryForm">
                     <div class="form_group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name">
@@ -65,13 +67,27 @@
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form id="editCategoryForm">
+                    <input type="hidden" id="editId">
                     <div class="form_group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name">
+                        <label for="editName">Name</label>
+                        <input type="text" id="editName" name="editName">
                     </div>
                     <button type="submit">Update</button>
                 </form>
+            </div>
+        </div>
+        <div class="modal3">
+            <div class="modal-heading">Delete Category
+                <div class="close-modal"><i class="fa fa-times"></i></div>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure your really want to delete this category?</h4>
+                <input type="hidden" id="deleteId">
+               <div class="buttonRow">
+                <button id="cancel-delete" class="outline">Cancel</button>
+                <button id="confirm-categoryDelete">Confirm</button>
+               </div>
             </div>
         </div>
     </div>

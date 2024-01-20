@@ -15,11 +15,11 @@
                 </div>
 
 
-               <div class="pie-chart">
-                <canvas id="incomeExpenseChart"></canvas>
-                <input type="hidden" id="incomeVal" value="23000">
-                <input type="hidden" id="expenseVal" value="17000">
-               </div>
+                <div class="pie-chart">
+                    <canvas id="incomeExpenseChart"></canvas>
+                    <input type="hidden" id="incomeVal" value="23000">
+                    <input type="hidden" id="expenseVal" value="17000">
+                </div>
             </div>
         </div>
         <div class="backdrop"></div>
@@ -38,4 +38,8 @@
             </div>
         </div>
     </div>
+
+    <script>
+       var chart = true
+    </script>
 @endsection

@@ -16,41 +16,57 @@ $(document).ready(function () {
     });
 });
 
-$('.head-action').click(function() {
+$(document).on('click', '.head-action', function() {
     $('.backdrop').addClass('active')
     $('.modal').addClass('active')
 })
-$('.edit-data').click(function() {
+$(document).on('click', '.edit-category', function() {
     $('.backdrop').addClass('active')
     $('.modal2').addClass('active')
+
+    $('#editName').val($(this).attr('data-name'))
+    $('#editId').val($(this).attr('data-id'))
 })
-$('.close-modal').click(function() {
+$(document).on('click', '.delete-data', function() {
+  $('#delete-id').val('');
+    $('.backdrop').addClass('active')
+    $('.modal3').addClass('active')
+    $('#deleteId').val($(this).attr('data-id'));
+})
+$(document).on('click', '.close-modal', function() {
     $('.backdrop').removeClass('active')
     $('.modal').removeClass('active')
     $('.modal2').removeClass('active')
+    $('.modal3').removeClass('active')
+})
+$(document).on('click', '#cancel-delete', function() {
+  $('.backdrop').removeClass('active')
+  $('.modal3').removeClass('active')
 })
 
 
-const xValues = ["Income", "Expense"];
-let incomeVal = Number($('#incomeVal').val());
-let expenseVal = Number($('#expenseVal').val());
+if(chart) {
+  const xValues = ["Income", "Expense"];
+  let incomeVal = Number($('#incomeVal').val());
+  let expenseVal = Number($('#expenseVal').val());
 
-const yValues = [incomeVal, expenseVal];
-const barColors = [
-  "#6e082a",
-  "#ff0000",
-];
+  const yValues = [incomeVal, expenseVal];
+  const barColors = [
+    "#6e082a",
+    "#ff0000",
+  ];
 
-new Chart("incomeExpenseChart", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-});
+  new Chart("incomeExpenseChart", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+  });
+}
 
 $('#income_period').change(function() {
   let val = $(this).val()
@@ -81,4 +97,14 @@ $('#overall_period').change(function() {
   else {
     $('.overallRange').removeClass('active')
   }
+})
+
+$(document).on('click', '.close-success-modal', function() {
+  location.reload()
+  $('.backdrop').removeClass('active')
+  $('.success-modal').removeClass('active')
+})
+$(document).on('click', '.close-error-modal', function() {
+  $('.backdrop').removeClass('active')
+  $('.error-modal').removeClass('active')
 })

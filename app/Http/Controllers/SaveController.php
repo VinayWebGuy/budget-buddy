@@ -5,6 +5,8 @@ use Str;
 
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Income;
+use App\Models\Expense;
 use Session;
 
 use Illuminate\Http\Request;
@@ -71,7 +73,7 @@ class SaveController extends Controller
 
     public function saveCategory(Request $req) {
         $check = Category::where('name', $req->name)->where('user_id', Session::get('user_id'))->first();
-        if(!$check) {;
+        if(!$check) {
             $category = new Category;
             $category->user_id = Session::get('user_id');
             $category->name = $req->name;
@@ -88,5 +90,35 @@ class SaveController extends Controller
         $category->status = $status;
         $category->save();
         return redirect()->back();
+    }
+    public function saveIncome(Request $req) {
+            $income = new Income;
+            $income->user_id = Session::get('user_id');
+            $income->amount = $req->amount;
+            $income->category = $req->category;
+            $income->date = $req->date;
+            $income->method = $req->method;
+            $income->remarks = $req->remarks;
+            $income->save();
+            echo "success";
+    }
+    public function saveExpense(Request $req) {
+            $expense = new Expense;
+            $expense->user_id = Session::get('user_id');
+            $expense->amount = $req->amount;
+            $expense->category = $req->category;
+            $expense->date = $req->date;
+            $expense->method = $req->method;
+            $expense->remarks = $req->remarks;
+            $expense->save();
+            echo "success";
+    }
+
+    public function setup(Request $req) {
+        $user = User::find(Session::get('user_id'));
+        $user->monthly_budget = $req->monthly_budget;
+        $user->currency = $req->currency;
+        $user->save();
+        echo "success";
     }
 }

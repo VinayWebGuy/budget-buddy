@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Income;
+use App\Models\Expense;
 
 use Session;
 
@@ -15,6 +17,36 @@ class DeleteController extends Controller
         if($category) {
             if($category->user_id == Session::get('user_id')){
                 $category->delete();
+                echo "deleted";
+            }
+            else {
+                echo "error";
+            }
+        }
+        else {
+            echo "error";
+        }
+    }
+    public function deleteIncome(Request $req) {
+        $income = Income::find($req->id);
+        if($income) {
+            if($income->user_id == Session::get('user_id')){
+                $income->delete();
+                echo "deleted";
+            }
+            else {
+                echo "error";
+            }
+        }
+        else {
+            echo "error";
+        }
+    }
+    public function deleteExpense(Request $req) {
+        $expense = Expense::find($req->id);
+        if($expense) {
+            if($expense->user_id == Session::get('user_id')){
+                $expense->delete();
                 echo "deleted";
             }
             else {

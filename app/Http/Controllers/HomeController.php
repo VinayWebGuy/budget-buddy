@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Income;
+use App\Models\Expense;
+use App\Models\User;
 
 use Session;
 
@@ -18,7 +21,18 @@ class HomeController extends Controller
         return view('login');
     }
     public function index() {
-        return view('index');
+        $sumExpense = Expense::where('user_id', Session::get('user_id'))
+            ->whereMonth('date', now()->month)
+            ->whereYear('date', now()->year)
+            ->sum('amount');
+        $sumIncome = Income::where('user_id', Session::get('user_id'))
+            ->whereMonth('date', now()->month)
+            ->whereYear('date', now()->year)
+            ->sum('amount');
+        $income = Income::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->limit(5)->get();
+        $expense = Expense::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->limit(5)->get();
+        $user = User::find(Session::get('user_id'));
+        return view('index', compact('sumExpense', 'sumIncome', 'income', 'expense', 'user'));
     }
     public function category() {
         
@@ -26,13 +40,28 @@ class HomeController extends Controller
         return view('category', compact('category'));
     }
     public function income() {
-        return view('income');
+        $category = Category::where('user_id', Session::get('user_id'))->where('status', 1)->orderBy('name', 'asc')->get();
+        $income = Income::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->paginate(10);
+        $user = User::find(Session::get('user_id'));
+        return view('income', compact('category', 'income', 'user'));
     }
     public function expense() {
-        return view('expense');
+        $category = Category::where('user_id', Session::get('user_id'))->where('status', 1)->orderBy('name', 'asc')->get();
+        $expense = Expense::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->paginate(10);
+        $user = User::find(Session::get('user_id'));
+        return view('expense', compact('category', 'expense', 'user'));
     }
     public function budget() {
-        return view('budget');
+        $sumExpense = Expense::where('user_id', Session::get('user_id'))
+                    ->whereMonth('date', now()->month)
+                    ->whereYear('date', now()->year)
+                    ->sum('amount');
+        $sumIncome = Income::where('user_id', Session::get('user_id'))
+                    ->whereMonth('date', now()->month)
+                    ->whereYear('date', now()->year)
+                    ->sum('amount');
+        $user = User::find(Session::get('user_id'));
+        return view('budget', compact('sumExpense', 'sumIncome', 'user'));
     }
     public function report() {
         return view('report');
@@ -44,7 +73,8 @@ class HomeController extends Controller
         return view('security');
     }
     public function profile() {
-        return view('profile');
+        $user = User::find(Session::get('user_id'));
+        return view('profile', compact('user'));
     }
     public function bb_club() {
         return view('bb_club');

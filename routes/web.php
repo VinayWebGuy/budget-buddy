@@ -31,12 +31,20 @@ Route::group(['middleware'=>'loginauth'],function(){
     Route::get('category/status/{status}/{id}', [SaveController::class,'changeCategoryStatus']);
     // Save
     Route::post('save-category', [SaveController::class, 'saveCategory']);
+    Route::post('save-income', [SaveController::class, 'saveIncome']);
+    Route::post('save-expense', [SaveController::class, 'saveExpense']);
+    Route::post('setup', [SaveController::class, 'setup']);
 
     // Delete
     Route::get('delete-category', [DeleteController::class, 'deleteCategory']);
+    Route::get('delete-income', [DeleteController::class, 'deleteIncome']);
+    Route::get('delete-expense', [DeleteController::class, 'deleteExpense']);
 
     // Update
     Route::post('update-category', [UpdateController::class, 'updateCategory']);
+    Route::post('update-income', [UpdateController::class, 'updateIncome']);
+    Route::post('update-expense', [UpdateController::class, 'updateExpense']);
+    Route::post('update-budget', [UpdateController::class, 'updateBudget']);
 });
 
 

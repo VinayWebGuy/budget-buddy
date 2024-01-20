@@ -27,6 +27,17 @@ $(document).on('click', '.edit-category', function() {
     $('#editName').val($(this).attr('data-name'))
     $('#editId').val($(this).attr('data-id'))
 })
+$(document).on('click', '.edit-incomeExpense', function() {
+    $('.backdrop').addClass('active')
+    $('.modal2').addClass('active')
+
+    $('#editAmount').val($(this).attr('data-amount'))
+    $('#editDate').val($(this).attr('data-date'))
+    $('#editCategory').val($(this).attr('data-category'))
+    $('#editMethod').val($(this).attr('data-method'))
+    $('#editRemarks').val($(this).attr('data-remarks'))
+    $('#editId').val($(this).attr('data-id'))
+})
 $(document).on('click', '.delete-data', function() {
   $('#delete-id').val('');
     $('.backdrop').addClass('active')
@@ -108,3 +119,14 @@ $(document).on('click', '.close-error-modal', function() {
   $('.backdrop').removeClass('active')
   $('.error-modal').removeClass('active')
 })
+
+$('#setup_monthly_budget').on('input', function() {
+  let val = $('#setup_monthly_budget').val();
+  if(val.trim().length > 0) {
+    $('#setupBtn').attr('disabled', false)
+  }
+  else {
+    $('#setupBtn').attr('disabled', true)
+  }
+})
+

@@ -4,7 +4,6 @@
 @section('content')
     <div class="content">
         <h2 class="page-heading">Expense<span>Main <i class="fa fa-chevron-right"></i> Expense</span></h2>
-
         <div class="working-area">
             <div class="head">
                 <span>Total Expense</span>
@@ -13,40 +12,31 @@
             <div class="body">
                 <table>
                     <thead>
-                        <th>ID</th>
+                        <th>Date</th>
                         <th>Amount</th>
                         <th>Category</th>
                         <th>Remarks</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
+                        @if(count($expense) > 0)
+                        @foreach ($expense as $e)
                         <tr>
-                            <td>1</td>
-                            <td><span>₹</span> 300</td>
-                            <td>Food</td>
-                            <td>Momos</td>
+                            <td>{{$e->date}}</td>
+                            <td><span>{{$user->currency}}</span>{{$e->amount}}</td>
+                            <td>{{$e->category}}</td>
+                            <td>{{$e->remarks}}</td>
                             <td>
-                                <a class="active" href="#">Active</a>
-                            </td>
-                            <td>
-                                <a class="table-action edit-data" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
-                                <a class="table-action" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
+                                <a data-amount="{{$e->amount}}" data-date="{{$e->date}}" data-category="{{$e->category}}" data-method="{{$e->method}}" data-remarks="{{$e->remarks}}" data-id="{{$e->id}}" class="table-action edit-incomeExpense" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                                <a data-id="{{$e->id}}" class="table-action delete-data" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
+                        @endforeach
+                        @else
                         <tr>
-                            <td>2</td>
-                            <td><span>₹</span> 1700</td>
-                            <td>Travel</td>
-                            <td></td>
-                            <td>
-                                <a class="inactive" href="#">Inactive</a>
-                            </td>
-                            <td>
-                                <a class="table-action edit-data" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
-                                <a class="table-action" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                            </td>
+                            <td colspan="5" class="center">No Expense Found</td>
                         </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>
@@ -57,10 +47,10 @@
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form id="addExpenseForm">
                     <div class="form_group">
                         <label for="amount">Amount</label>
-                        <input type="number" id="amount" name="amount">
+                        <input type="number" id="amount" name="amount" step="0.1">
                     </div>
                     <div class="form_group">
                         <label for="date">Date</label>
@@ -70,8 +60,9 @@
                         <label for="category">Category</label>
                         <select name="category" id="category">
                             <option hidden value=""></option>
-                            <option value="Food">Food</option>
-                            <option value="Travel">Travel</option>
+                           @foreach ($category as $c)
+                               <option value="{{$c->name}}">{{$c->name}}</option>
+                           @endforeach
                         </select>
                     </div>
                     <div class="form_group">
@@ -96,26 +87,28 @@
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form id="editExpenseForm">
+                    <input type="hidden" id="editId">
                     <div class="form_group">
-                        <label for="amount">Amount</label>
-                        <input type="number" id="amount" name="amount">
+                        <label for="editAmount">Amount</label>
+                        <input type="number" id="editAmount" name="editAmount" step="0.1">
                     </div>
                     <div class="form_group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" name="date">
+                        <label for="editDate">Date</label>
+                        <input type="date" id="editDate" name="editDate">
                     </div>
                     <div class="form_group">
-                        <label for="category">Category</label>
-                        <select name="category" id="category">
+                        <label for="editCategory">Category</label>
+                        <select name="editCategory" id="editCategory">
                             <option hidden value=""></option>
-                            <option value="Food">Food</option>
-                            <option value="Travel">Travel</option>
+                            @foreach ($category as $c)
+                               <option value="{{$c->name}}">{{$c->name}}</option>
+                           @endforeach
                         </select>
                     </div>
                     <div class="form_group">
-                        <label for="method">Payment Method</label>
-                        <select name="method" id="method">
+                        <label for="editMethod">Payment Method</label>
+                        <select name="editMethod" id="editMethod">
                             <option hidden value=""></option>
                             <option value="Cash">Cash</option>
                             <option value="UPI">UPI</option>
@@ -123,11 +116,24 @@
                         </select>
                     </div>
                     <div class="form_group">
-                        <label for="remarks">Remarks</label>
-                       <textarea name="remarks" id="remarks" rows="2"></textarea>
+                        <label for="editRemarks">Remarks</label>
+                       <textarea name="editRemarks" id="editRemarks" rows="2"></textarea>
                     </div>
                     <button type="submit">Update</button>
                 </form>
+            </div>
+        </div>
+        <div class="modal3">
+            <div class="modal-heading">Delete expense
+                <div class="close-modal"><i class="fa fa-times"></i></div>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure your really want to delete this expense?</h4>
+                <input type="hidden" id="deleteId">
+               <div class="buttonRow">
+                <button id="cancel-delete" class="outline">Cancel</button>
+                <button id="confirm-expenseDelete">Confirm</button>
+               </div>
             </div>
         </div>
     </div>

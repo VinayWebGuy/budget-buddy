@@ -39,6 +39,7 @@
                     @endif
                     </tbody>
                 </table>
+                {{ $income->links('vendor.pagination.custom-pagination') }}
             </div>
         </div>
         <div class="backdrop"></div>

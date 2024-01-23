@@ -11,20 +11,20 @@
                 <div class="head-action">Change Password <i class="fa fa-key"></i></div>
             </div>
             <div class="body">
-                <form action="">
+                <form id="profileForm">
                     <div class="row">
 
+                        <div class="form_group">
+                            <label for="email">Email</label>
+                            <input readonly type="email" id="email" name="email" value="{{$user->email}}">
+                        </div>
                         <div class="form_group">
                             <label for="name">Name</label>
                            <input type="text" id="name" name="name" value="{{$user->name}}">
                         </div>
                         <div class="form_group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" value="{{$user->email}}">
-                        </div>
-                        <div class="form_group">
-                            <label for="number">Mobile</label>
-                            <input type="number" id="number" name="number" value="{{$user->mobile}}">
+                            <label for="mobile">Mobile</label>
+                            <input type="number" id="mobile" name="mobile" value="{{$user->mobile}}">
                         </div>
                     </div>
                     <button type="submit">Update</button>
@@ -37,7 +37,7 @@
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form id="changePassword">
                     <div class="form_group">
                         <label for="old_password">Old Password</label>
                         <input type="password" id="old_password" name="old_password">

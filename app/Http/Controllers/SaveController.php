@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 use Str;
-
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Income;
 use App\Models\Expense;
+use App\Models\Club;
 use Session;
-
 use Illuminate\Http\Request;
 
 class SaveController extends Controller
 {
-
     public function register(Request $req) {
         $req->validate([
             'name' => 'required',
@@ -22,7 +20,6 @@ class SaveController extends Controller
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
         ]);
-
         $user = new User;
         $user->name = $req->name;
         $user->uid = Str::random(13)."-".md5($req->email);
@@ -32,9 +29,7 @@ class SaveController extends Controller
         $user->save();
         session()->flash('success', 'Account created successfully! Kindly confirm your account by click on the link received on your email.');
         return redirect()->back();
-
     }
-
     public function login(Request $req) {
         $req->validate([
             'email' => 'required',
@@ -52,11 +47,10 @@ class SaveController extends Controller
                     Session::put('session_id', $session_id);
                     $user->session_id = $session_id;
                     $user->save();
-
                     return redirect('/');
                 }
                 else {
-                    session()->flash('error', 'Account banned! Your account has been banned due to some unsuspicious activities.');
+                    session()->flash('error', 'Account decativated! To Activate your account kindly send an email to vinaywebguy@gmail.com with message ACTIVATE MY ACCOUNT from registered email address');
                     return redirect()->back();
                 }
             }
@@ -70,7 +64,6 @@ class SaveController extends Controller
             return redirect()->back();
         }
     }
-
     public function saveCategory(Request $req) {
         $check = Category::where('name', $req->name)->where('user_id', Session::get('user_id'))->first();
         if(!$check) {
@@ -113,12 +106,21 @@ class SaveController extends Controller
             $expense->save();
             echo "success";
     }
-
     public function setup(Request $req) {
         $user = User::find(Session::get('user_id'));
         $user->monthly_budget = $req->monthly_budget;
         $user->currency = $req->currency;
         $user->save();
+        echo "success";
+    }
+    public function saveClubEntry(Request $req) {
+        $club = new Club;
+        $club->user_id = Session::get('user_id');
+        $club->date = $req->date;
+        $club->amount = $req->amount;
+        $club->payment_type = $req->payment_type;
+        $club->remarks = $req->remarks;
+        $club->save();
         echo "success";
     }
 }

@@ -11,21 +11,20 @@
                 <div class="head-action">Deactivate <i class="fa fa-ban"></i></div>
             </div>
             <div class="body">
-                <form action="">
+                <form id="securityForm">
                     <div class="row">
-
                         <div class="form_group">
-                            <label for="tfa">2 Factor Authentication</label>
-                            <select name="tfa" id="tfa">
-                                <option value="0">Disable</option>
-                                <option value="1">Enable</option>
+                            <label for="multiple_login">Multiple Login</label>
+                            <select name="multiple_login" id="multiple_login">
+                                <option @if($user->multiple_login == 0) selected @endif value="0">Disable</option>
+                                <option @if($user->multiple_login == 1) selected @endif value="1">Enable</option>
                             </select>
                         </div>
                         <div class="form_group">
                             <label for="notifications">Notifications</label>
                             <select name="notifications" id="notifications">
-                                <option value="1">Enable</option>
-                                <option value="0">Disable</option>
+                                <option @if($user->notifications == 1) selected @endif value="1">Enable</option>
+                                <option @if($user->notifications == 0) selected @endif value="0">Disable</option>
                             </select>
                         </div>
                     </div>
@@ -39,7 +38,7 @@
                 <div class="close-modal"><i class="fa fa-times"></i></div>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form id="deactivateAccount">
                     <div class="form_group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password">

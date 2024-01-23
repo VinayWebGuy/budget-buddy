@@ -588,7 +588,7 @@ a.inactive {
 /* Success Modal */
 .success-modal, .error-modal {
     width: 400px;
-    height: 250px;
+    min-height: 250px;
     background-color: #fff;
     border-radius: 7px;
     z-index: 100;

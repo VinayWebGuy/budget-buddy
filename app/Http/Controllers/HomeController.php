@@ -1,19 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Category;
 use App\Models\Income;
 use App\Models\Expense;
 use App\Models\User;
-
+use App\Models\Club;
 use Session;
-
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
     public function register() {
         return view('register');
     }
@@ -35,7 +32,6 @@ class HomeController extends Controller
         return view('index', compact('sumExpense', 'sumIncome', 'income', 'expense', 'user'));
     }
     public function category() {
-        
         $category = Category::where('user_id', Session::get('user_id'))->orderBy('name', 'asc')->paginate(10);
         return view('category', compact('category'));
     }
@@ -67,17 +63,20 @@ class HomeController extends Controller
         return view('report');
     }
     public function account() {
-        return view('account');
+        $user = User::find(Session::get('user_id'));
+        return view('account', compact('user'));
     }
     public function security() {
-        return view('security');
+        $user = User::find(Session::get('user_id'));
+        return view('security', compact('user'));
     }
     public function profile() {
         $user = User::find(Session::get('user_id'));
         return view('profile', compact('user'));
     }
     public function bb_club() {
-        return view('bb_club');
+        $club = Club::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->paginate(10);
+        return view('bb_club', compact('club'));
     }
     public function logout() {
         Session::forget('user_id');
@@ -87,6 +86,4 @@ class HomeController extends Controller
         Session::forget('session_id');
         return redirect('login');
     }
-
-
 }

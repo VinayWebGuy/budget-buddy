@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Income;
 use App\Models\Expense;
+use App\Models\Club;
 
 use Session;
 
@@ -47,6 +48,21 @@ class DeleteController extends Controller
         if($expense) {
             if($expense->user_id == Session::get('user_id')){
                 $expense->delete();
+                echo "deleted";
+            }
+            else {
+                echo "error";
+            }
+        }
+        else {
+            echo "error";
+        }
+    }
+    public function deleteClubEntry(Request $req) {
+        $club = Club::find($req->id);
+        if($club) {
+            if($club->user_id == Session::get('user_id')){
+                $club->delete();
                 echo "deleted";
             }
             else {

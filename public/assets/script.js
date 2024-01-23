@@ -38,6 +38,16 @@ $(document).on('click', '.edit-incomeExpense', function() {
     $('#editRemarks').val($(this).attr('data-remarks'))
     $('#editId').val($(this).attr('data-id'))
 })
+$(document).on('click', '.edit-clubEntry', function() {
+    $('.backdrop').addClass('active')
+    $('.modal2').addClass('active')
+
+    $('#editAmount').val($(this).attr('data-amount'))
+    $('#editDate').val($(this).attr('data-date'))
+    $('#editType').val($(this).attr('data-type'))
+    $('#editRemarks').val($(this).attr('data-remarks'))
+    $('#editId').val($(this).attr('data-id'))
+})
 $(document).on('click', '.delete-data', function() {
   $('#delete-id').val('');
     $('.backdrop').addClass('active')
@@ -130,3 +140,13 @@ $('#setup_monthly_budget').on('input', function() {
   }
 })
 
+
+
+$(document).ready(function () {
+  $(".from_date").on("input", function () {
+    var fromDateValue = $(this).val();
+    var toDateInput = $(this).closest('.row').find('.to_date');
+    toDateInput.prop("disabled", false);
+    toDateInput.attr("min", fromDateValue);
+  });
+});

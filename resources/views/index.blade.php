@@ -24,15 +24,15 @@
                     <h4>Recent Income</h4>
                     <table>
                         <thead>
+                            <th>Date</th>
                             <th>Amount</th>
-                            <th>Category</th>
                         </thead>
                         <tbody>
                             @if(count($income) > 0)
                             @foreach($income as $i)
                             <tr>
+                                <td>{{$i->date}}</td>
                                 <td><span>{{$user->currency}}</span>{{$i->amount}}</td>
-                                <td>{{$i->category}}</td>
                             </tr>
                             @endforeach
                             @if(count($income) > 5)
@@ -52,15 +52,15 @@
                     <h4>Recent Expense</h4>
                     <table>
                         <thead>
+                            <th>Date</th>
                             <th>Amount</th>
-                            <th>Category</th>
                         </thead>
                         <tbody>
                             @if(count($expense) > 0)
                             @foreach($expense as $e)
                             <tr>
+                                <td>{{$e->date}}</td>
                                 <td><span>{{$user->currency}}</span>{{$e->amount}}</td>
-                                <td>{{$e->category}}</td>
                             </tr>
                             @endforeach
                             @if(count($expense) > 5)
@@ -76,6 +76,38 @@
                         </tbody>
                     </table>
                   </div>
+                </div>
+                <div class="row">
+                    <div class="pie-chart">
+                        <h3>Income Chart (Category wise)</h3>
+                        <canvas id="incomeCategoryChart"></canvas>
+                        @foreach ($totalIncomeByCategory as $ti)
+                            <input type="hidden" class="cw_income" value="{{$ti->amount}}" data-category="{{$ti->category}}">
+                        @endforeach
+                    </div>
+                    <div class="pie-chart">
+                        <h3>Expense Chart (Category wise)</h3>
+                        <canvas id="expenseCategoryChart"></canvas>
+                        @foreach ($totalExpenseByCategory as $te)
+                            <input type="hidden" class="cw_expense" value="{{$te->amount}}" data-category="{{$te->category}}">
+                        @endforeach
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pie-chart">
+                        <h3>Income Chart (Method wise)</h3>
+                        <canvas id="incomeMethodChart"></canvas>
+                        @foreach ($totalIncomeByMethod as $ti)
+                            <input type="hidden" class="mw_income" value="{{$ti->amount}}" data-method="{{$ti->method}}">
+                        @endforeach
+                    </div>
+                    <div class="pie-chart">
+                        <h3>Expense Chart (Method wise)</h3>
+                        <canvas id="expenseMethodChart"></canvas>
+                        @foreach ($totalExpenseByMethod as $te)
+                            <input type="hidden" class="mw_expense" value="{{$te->amount}}" data-method="{{$te->method}}">
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

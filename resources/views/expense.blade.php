@@ -15,6 +15,7 @@
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Category</th>
+                        <th>Method</th>
                         <th>Remarks</th>
                         <th>Action</th>
                     </thead>
@@ -25,6 +26,7 @@
                             <td>{{$e->date}}</td>
                             <td><span>{{$user->currency}}</span>{{$e->amount}}</td>
                             <td>{{$e->category}}</td>
+                            <td>{{$e->method}}</td>
                             <td>{{$e->remarks}}</td>
                             <td>
                                 <a data-amount="{{$e->amount}}" data-date="{{$e->date}}" data-category="{{$e->category}}" data-method="{{$e->method}}" data-remarks="{{$e->remarks}}" data-id="{{$e->id}}" class="table-action edit-incomeExpense" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
@@ -72,7 +74,10 @@
                             <option hidden value=""></option>
                             <option value="Cash">Cash</option>
                             <option value="UPI">UPI</option>
-                            <option value="Bank Transfer">Bank Transfer</option>
+                              <option value="Cheque">Cheque</option>
+                              <option value="Credit Card">Credit Card</option>
+                              <option value="Bank Transfer">Bank Transfer</option>
+                              <option value="Others">Others</option>
                         </select>
                     </div>
                     <div class="form_group">
@@ -113,7 +118,10 @@
                             <option hidden value=""></option>
                             <option value="Cash">Cash</option>
                             <option value="UPI">UPI</option>
-                            <option value="Bank Transfer">Bank Transfer</option>
+                              <option value="Cheque">Cheque</option>
+                              <option value="Credit Card">Credit Card</option>
+                              <option value="Bank Transfer">Bank Transfer</option>
+                              <option value="Others">Others</option>
                         </select>
                     </div>
                     <div class="form_group">

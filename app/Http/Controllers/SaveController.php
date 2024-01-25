@@ -7,11 +7,30 @@ use App\Models\User;
 use App\Models\Income;
 use App\Models\Expense;
 use App\Models\Club;
+use App\Models\Notification;
 use Session;
 use Illuminate\Http\Request;
 
 class SaveController extends Controller
 {
+    public function notification($title) {
+        $user = User::find(Session::get('user_id'));
+        if($user->notifications == 1) {
+            $notification = new Notification;
+            $notification->user_id = Session::get('user_id');
+            $notification->title = $title;
+            $notification->save();
+        }
+    }
+    public function checkBudget() {
+        $user = User::find(Session::get('user_id'));
+        $sumExpense = Expense::where('user_id', Session::get('user_id'))
+        ->whereMonth('date', now()->month)
+        ->whereYear('date', now()->year)
+        ->sum('amount');
+        $budget = $user->monthly_budget;
+        return ($sumExpense / $budget) * 100;
+    }
     public function register(Request $req) {
         $req->validate([
             'name' => 'required',
@@ -27,7 +46,7 @@ class SaveController extends Controller
         $user->mobile = $req->mobile;
         $user->pwd = md5($req->password);
         $user->save();
-        session()->flash('success', 'Account created successfully! Kindly confirm your account by click on the link received on your email.');
+        session()->flash('success', 'Account created successfully! Click Already have an account to login.');
         return redirect()->back();
     }
     public function login(Request $req) {
@@ -93,6 +112,7 @@ class SaveController extends Controller
             $income->method = $req->method;
             $income->remarks = $req->remarks;
             $income->save();
+            $this->notification("Income Added Successfully!");
             echo "success";
     }
     public function saveExpense(Request $req) {
@@ -104,6 +124,11 @@ class SaveController extends Controller
             $expense->method = $req->method;
             $expense->remarks = $req->remarks;
             $expense->save();
+            $budget = $this->checkBudget();
+            if($budget > 50) {
+                $this->notification("Your monthly expense crossed ".$budget."% of your budget.");
+            }
+            $this->notification("Expense Added Successfully!");
             echo "success";
     }
     public function setup(Request $req) {
@@ -121,6 +146,7 @@ class SaveController extends Controller
         $club->payment_type = $req->payment_type;
         $club->remarks = $req->remarks;
         $club->save();
+        $this->notification("Club Entry Added Successfully!");
         echo "success";
     }
 }

@@ -6,8 +6,10 @@ use App\Models\Income;
 use App\Models\Expense;
 use App\Models\User;
 use App\Models\Club;
+use App\Models\Notification;
 use Session;
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -22,14 +24,45 @@ class HomeController extends Controller
             ->whereMonth('date', now()->month)
             ->whereYear('date', now()->year)
             ->sum('amount');
+
         $sumIncome = Income::where('user_id', Session::get('user_id'))
             ->whereMonth('date', now()->month)
             ->whereYear('date', now()->year)
             ->sum('amount');
+
         $income = Income::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->limit(5)->get();
+
         $expense = Expense::where('user_id', Session::get('user_id'))->orderBy('date', 'desc')->limit(5)->get();
+
+        $totalIncomeByCategory = Income::where('user_id', Session::get('user_id'))
+        ->select('category', DB::raw('SUM(amount) as amount'))
+        ->whereMonth('date', now()->month)
+        ->whereYear('date', now()->year)
+        ->groupBy('category')
+        ->get();
+
+        $totalExpenseByCategory = Expense::where('user_id', Session::get('user_id'))
+        ->select('category', DB::raw('SUM(amount) as amount'))
+        ->whereMonth('date', now()->month)
+        ->whereYear('date', now()->year)
+        ->groupBy('category')
+        ->get();
+
+        $totalIncomeByMethod = Income::where('user_id', Session::get('user_id'))
+        ->select('method', DB::raw('SUM(amount) as amount'))
+        ->whereMonth('date', now()->month)
+        ->whereYear('date', now()->year)
+        ->groupBy('method')
+        ->get();
+
+        $totalExpenseByMethod = Expense::where('user_id', Session::get('user_id'))
+        ->select('method', DB::raw('SUM(amount) as amount'))
+        ->whereMonth('date', now()->month)
+        ->whereYear('date', now()->year)
+        ->groupBy('method')
+        ->get();
         $user = User::find(Session::get('user_id'));
-        return view('index', compact('sumExpense', 'sumIncome', 'income', 'expense', 'user'));
+        return view('index', compact('sumExpense', 'sumIncome', 'income', 'expense', 'user', 'totalIncomeByCategory', 'totalExpenseByCategory', 'totalIncomeByMethod', 'totalExpenseByMethod'));
     }
     public function category() {
         $category = Category::where('user_id', Session::get('user_id'))->orderBy('name', 'asc')->paginate(10);

@@ -7,11 +7,30 @@ use App\Models\User;
 use App\Models\Income;
 use App\Models\Expense;
 use App\Models\Club;
+use App\Models\Notification;
 use Session;
 use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {
+    public function notification($title) {
+        $user = User::find(Session::get('user_id'));
+        if($user->notifications == 1) {
+            $notification = new Notification;
+            $notification->user_id = Session::get('user_id');
+            $notification->title = $title;
+            $notification->save();
+        }
+    }
+    public function checkBudget() {
+        $user = User::find(Session::get('user_id'));
+        $sumExpense = Expense::where('user_id', Session::get('user_id'))
+        ->whereMonth('date', now()->month)
+        ->whereYear('date', now()->year)
+        ->sum('amount');
+        $budget = $user->monthly_budget;
+        return ($sumExpense / $budget) * 100;
+    }
     public function updateCategory(Request $req) {
         $check = Category::where('name', $req->name)->where('user_id', Session::get('user_id'))->where('id', '!=', $req->id)->first();
         if(!$check) {;
@@ -33,6 +52,7 @@ class UpdateController extends Controller
         $income->method = $req->method;
         $income->remarks = $req->remarks;
         $income->save();
+        $this->notification("Income Updated Successfully!");
         echo "success";
     }
     public function updateExpense(Request $req) {
@@ -43,12 +63,18 @@ class UpdateController extends Controller
         $expense->method = $req->method;
         $expense->remarks = $req->remarks;
         $expense->save();
+        $budget = $this->checkBudget();
+        if($budget > 50) {
+            $this->notification("Your monthly expense crossed ".$budget."% of your budget.");
+        }
+        $this->notification("Expense Updated Successfully!");
         echo "success";
     }
     public function updateBudget(Request $req) {
         $user = User::find(Session::get('user_id'));
         $user->monthly_budget = $req->budget;
         $user->save();
+        $this->notification("Budget Updated Successfully!");
         echo "success";
     }
     public function updateAccount(Request $req) {
@@ -70,6 +96,7 @@ class UpdateController extends Controller
         if($user->pwd == md5($req->old_password)) {
             $user->pwd = md5($req->new_password);
             $user->save();
+            $this->notification("Password Changed Successfully!");
             echo "success";
         }
         else {
@@ -90,6 +117,7 @@ class UpdateController extends Controller
             $user->name = $req->name;
             $user->mobile = $req->mobile;
             $user->save();
+            $this->notification("Profile Updated Successfully!");
             echo "success";
         }
         else {
@@ -119,6 +147,12 @@ class UpdateController extends Controller
         $club->payment_type = $req->payment_type;
         $club->remarks = $req->remarks;
         $club->save();
+        $this->notification("Club Entry Updated Successfully!");
+        echo "success";
+   }
+   public function updateNotification(Request $req) {
+        $notification = Notification::where('user_id', Session::get('user_id'))->where('id', $req->id)->first();
+        $notification->delete();
         echo "success";
    }
 }

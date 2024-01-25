@@ -89,6 +89,140 @@ if(chart) {
   });
 }
 
+const barTotalColors = [
+  "#6e082a",
+  "#ff0000",
+  "#FF5733",
+  "#FFC300",
+  "#4CAF50",
+  "#00BCD4",
+  "#2196F3",
+  "#673AB7",
+  "#9C27B0",
+  "#F44336",
+  "#FF9800",
+  "#795548",
+  "#607D8B",
+  "#8BC34A",
+  "#FFEB3B",
+  "#9E9E9E",
+  "#03A9F4",
+  "#E91E63",
+  "#CDDC39",
+];
+
+// For Income by Category
+let data_i = $('.cw_income');
+let incomeValues = [];
+let incomeAmountValues = [];
+let barIncomeColors = [];
+for (let i = 0; i < data_i.length; i++) {
+  if(data_i[i].getAttribute('data-category') != "") {
+    incomeValues.push(data_i[i].getAttribute('data-category'))
+  }
+  else {
+    incomeValues.push("Unknown")
+  }
+  incomeAmountValues.push(Number(data_i[i].value));
+  barIncomeColors.push(barTotalColors[i]);
+}
+if(incomeValues.length > 0) {
+  new Chart("incomeCategoryChart", {
+    type: "doughnut",
+    data: {
+      labels: incomeValues,
+      datasets: [{
+        backgroundColor: barIncomeColors,
+        data: incomeAmountValues
+      }]
+    },
+  });
+}
+// For Expense By Category
+let data_e = $('.cw_expense');
+let expenseValues = [];
+let expenseAmountValues = [];
+let barExpenseColors = [];
+for (let i = 0; i < data_e.length; i++) {
+  if(data_i[i].getAttribute('data-category') != "") {
+    expenseValues.push(data_i[i].getAttribute('data-category'))
+  }
+  else {
+    expenseValues.push("Unknown")
+  }
+  expenseAmountValues.push(Number(data_e[i].value));
+  barExpenseColors.push(barTotalColors[i]);
+}
+if(expenseValues.length > 0) {
+  new Chart("expenseCategoryChart", {
+    type: "doughnut",
+    data: {
+      labels: expenseValues,
+      datasets: [{
+        backgroundColor: barExpenseColors,
+        data: expenseAmountValues
+      }]
+    },
+  });
+}
+
+// For Income by Method
+let data_im = $('.mw_income');
+let incomeMValues = [];
+let incomeMAmountValues = [];
+let barMIncomeColors = [];
+for (let i = 0; i < data_im.length; i++) {
+  if(data_im[i].getAttribute('data-method') != "") {
+    incomeMValues.push(data_im[i].getAttribute('data-method'))
+  }
+  else {
+    incomeMValues.push("Unknown")
+  }
+  incomeMAmountValues.push(Number(data_im[i].value));
+  barMIncomeColors.push(barTotalColors[i]);
+}
+if(incomeMValues.length > 0) {
+  new Chart("incomeMethodChart", {
+    type: "doughnut",
+    data: {
+      labels: incomeMValues,
+      datasets: [{
+        backgroundColor: barMIncomeColors,
+        data: incomeMAmountValues
+      }]
+    },
+  });
+}
+
+// For Expense By Category
+let data_em = $('.mw_expense');
+let expenseMValues = [];
+let expenseAmountMValues = [];
+let barMExpenseColors = [];
+for (let i = 0; i < data_em.length; i++) {
+  if(data_em[i].getAttribute('data-method') != "") {
+    expenseMValues.push(data_em[i].getAttribute('data-method'))
+  }
+  else {
+    expenseMValues.push("Unknown")
+  }
+  expenseAmountMValues.push(Number(data_em[i].value));
+  barMExpenseColors.push(barTotalColors[i]);
+}
+if(expenseMValues.length > 0) {
+  new Chart("expenseMethodChart", {
+    type: "doughnut",
+    data: {
+      labels: expenseMValues,
+      datasets: [{
+        backgroundColor: barMExpenseColors,
+        data: expenseAmountMValues
+      }]
+    },
+  });
+}
+
+
 $('#income_period').change(function() {
   let val = $(this).val()
 
@@ -150,3 +284,32 @@ $(document).ready(function () {
     toDateInput.attr("min", fromDateValue);
   });
 });
+
+
+$(document).ready(function () {
+  function toggleSidebarClass() {
+      if ($(window).width() >= 1000) {
+          $('body').removeClass('collapsed');
+      } else {
+          $('body').addClass('collapsed');
+      }
+  }
+  $(window).resize(function () {
+      toggleSidebarClass();
+  });
+  toggleSidebarClass();
+});
+
+
+$('.single-notificiation').on('click', function() {
+  let id = $(this).attr('data-id');
+  $(this).fadeOut();
+  $.ajax({
+    type: "GET",
+    cache: false,
+    data: {id: id},
+    url: 'update-notification',
+    success:function(response) {
+    }
+  })
+})

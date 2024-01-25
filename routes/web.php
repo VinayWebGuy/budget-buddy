@@ -53,10 +53,12 @@ Route::group(['middleware'=>'loginauth'],function(){
     Route::post('update-profile', [UpdateController::class, 'updateProfile']);
     Route::post('update-security', [UpdateController::class, 'updateSecurity']);
     Route::post('update-club-entry', [UpdateController::class, 'updateClubEntry']);
+    Route::get('update-notification', [UpdateController::class, 'updateNotification']);
 
     Route::post('decativate-account', [UpdateController::class, 'deactivateAccount']);
 
     Route::get('export-income', [ExportController::class, 'exportIncome']);
+    Route::get('export-expense', [ExportController::class, 'exportExpense']);
 });
 
 

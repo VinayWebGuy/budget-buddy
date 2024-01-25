@@ -12,6 +12,9 @@
         var chart = false
     </script>
 </head>
+@php
+    $notifications = DB::table('notifications')->where('user_id', Session::get('user_id'))->orderBy('created_at', 'desc')->where('status', 1)->get();
+@endphp
 <body class="">
   <main>
     <aside>
@@ -40,12 +43,18 @@
                     <i class="fa-solid fa-bell"></i>
                     <div class="header-icon-box">
                         <h4>Recent Notifications</h4>
-                        <div class="single-notificiation"><span>New Expense Added.</span></div>
-                        <div class="single-notificiation"><span>New Income Added.</span></div>
-                        <div class="single-notificiation"><span>Your monthly expense crossed 70% of your budget.</span></div>
-                        <div class="single-notificiation"><span>New Expense Added.</span></div>
-                        <div class="single-notificiation"><span>Your monthly expense crossed 50% of your budget.</span></div>
-                        <a href="#" class="view-all">View All <i class="fa fa-arrow-right"></i></a>
+                        @if(count($notifications) > 0)
+                        <div class="all-notifications">
+                            @foreach($notifications as $n)
+                                <div data-id="{{$n->id}}" class="single-notificiation"><i class="fa fa-bell"></i> <span>{{$n->title}}</span></div>
+                            @endforeach
+                        </div>
+                        @else 
+                        <div class="no-notification">
+                            <p>No Notifications!</p>
+                        </div>
+                        @endif
+                        {{-- <a href="#" class="view-all">View All <i class="fa fa-arrow-right"></i></a> --}}
                     </div>
                 </div>
                <div class="settings-header">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2024 at 01:28 PM
+-- Generation Time: Jan 25, 2024 at 08:01 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -38,14 +38,6 @@ CREATE TABLE `bb_club` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `bb_club`
---
-
-INSERT INTO `bb_club` (`id`, `user_id`, `amount`, `date`, `payment_type`, `remarks`, `created_at`, `updated_at`) VALUES
-(2, 1, 1200, '2024-01-22', 'AAC', 'Testing Data', '2024-01-23 13:34:45', '2024-01-23 13:34:45'),
-(3, 1, 3100, '2024-01-23', 'SAA', 'PNB to HDFC', '2024-01-23 13:35:02', '2024-01-23 13:35:11');
-
 -- --------------------------------------------------------
 
 --
@@ -67,23 +59,30 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `user_id`, `name`, `slug`, `status`, `created_at`, `updated_at`) VALUES
-(7, 1, 'Food', 'food', 1, '2024-01-20 10:57:50', '2024-01-20 10:57:50'),
-(8, 1, 'Travel', 'travel', 1, '2024-01-20 10:57:58', '2024-01-20 10:57:58'),
-(9, 1, 'Online Shopping', 'online-shopping', 1, '2024-01-20 10:58:09', '2024-01-20 10:58:09'),
-(10, 1, 'Health', 'health', 1, '2024-01-20 10:58:41', '2024-01-20 10:58:41'),
-(11, 1, 'Salary', 'salary', 1, '2024-01-20 10:58:48', '2024-01-20 10:58:48'),
-(12, 1, 'Home Rapair', 'home-rapair', 1, '2024-01-20 10:59:06', '2024-01-20 10:59:06'),
-(13, 1, 'Grooming', 'grooming', 1, '2024-01-20 10:59:17', '2024-01-20 10:59:17'),
-(14, 1, 'Fuel', 'fuel', 1, '2024-01-20 10:59:23', '2024-01-20 10:59:23'),
-(15, 1, 'Family Member', 'family-member', 1, '2024-01-20 10:59:42', '2024-01-20 10:59:42'),
-(16, 1, 'Entertainment', 'entertainment', 1, '2024-01-20 10:59:51', '2024-01-20 10:59:51'),
-(17, 1, 'Education', 'education', 1, '2024-01-20 10:59:57', '2024-01-20 10:59:57'),
-(18, 1, 'Bills', 'bills', 1, '2024-01-20 11:00:13', '2024-01-20 11:00:13'),
-(19, 1, 'Shopping', 'shopping', 1, '2024-01-20 11:00:21', '2024-01-20 11:00:21'),
-(20, 1, 'Gift', 'gift', 1, '2024-01-20 11:00:27', '2024-01-20 11:00:27'),
-(21, 1, 'Extra', 'extra', 1, '2024-01-20 11:00:41', '2024-01-20 11:00:41'),
-(22, 1, 'Website Development', 'website-development', 1, '2024-01-20 11:00:57', '2024-01-20 11:00:57'),
-(23, 2, 'Dummy', 'dummy', 1, '2024-01-20 16:54:51', '2024-01-20 16:54:51');
+(1, 1, 'Education', 'education', 1, '2024-01-25 12:22:11', '2024-01-25 12:22:11'),
+(2, 1, 'Health', 'health', 1, '2024-01-25 12:22:18', '2024-01-25 12:22:18'),
+(3, 1, 'Entertainment', 'entertainment', 1, '2024-01-25 12:22:40', '2024-01-25 12:22:40'),
+(4, 1, 'Donation', 'donation', 1, '2024-01-25 12:22:50', '2024-01-25 12:22:50'),
+(5, 1, 'Bills', 'bills', 1, '2024-01-25 12:23:18', '2024-01-25 12:23:18'),
+(6, 1, 'Recharge', 'recharge', 1, '2024-01-25 12:23:36', '2024-01-25 12:23:36'),
+(7, 1, 'Salary', 'salary', 1, '2024-01-25 12:23:42', '2024-01-25 12:23:42'),
+(8, 1, 'Painting', 'painting', 1, '2024-01-25 12:24:12', '2024-01-25 12:24:12'),
+(9, 1, 'Electricity', 'electricity', 1, '2024-01-25 12:24:19', '2024-01-25 12:24:19'),
+(10, 1, 'House Repair', 'house-repair', 1, '2024-01-25 12:24:28', '2024-01-25 12:24:28'),
+(11, 1, 'Online Shopping', 'online-shopping', 1, '2024-01-25 12:24:38', '2024-01-25 12:24:38'),
+(12, 1, 'Offline Shopping', 'offline-shopping', 1, '2024-01-25 12:24:47', '2024-01-25 12:24:47'),
+(13, 1, 'Food', 'food', 1, '2024-01-25 12:24:56', '2024-01-25 12:24:56'),
+(14, 1, 'Groceries', 'groceries', 1, '2024-01-25 12:25:04', '2024-01-25 12:25:04'),
+(15, 1, 'Rent', 'rent', 1, '2024-01-25 12:25:10', '2024-01-25 12:25:10'),
+(16, 1, 'Others', 'others', 1, '2024-01-25 12:25:37', '2024-01-25 12:25:37'),
+(17, 1, 'Petrol', 'petrol', 1, '2024-01-25 12:26:20', '2024-01-25 12:26:20'),
+(18, 1, 'Travel', 'travel', 1, '2024-01-25 12:26:28', '2024-01-25 12:26:28'),
+(19, 1, 'Insurance', 'insurance', 1, '2024-01-25 12:26:38', '2024-01-25 12:26:38'),
+(20, 1, 'House Maintenance', 'house-maintenance', 1, '2024-01-25 12:27:27', '2024-01-25 12:27:27'),
+(21, 1, 'Paper Work', 'paper-work', 1, '2024-01-25 12:27:34', '2024-01-25 12:27:34'),
+(22, 1, 'EMI', 'emi', 1, '2024-01-25 12:28:12', '2024-01-25 12:28:12'),
+(23, 1, 'Monthly Installment', 'monthly-installment', 1, '2024-01-25 12:28:24', '2024-01-25 12:28:24'),
+(24, 1, 'Investment', 'investment', 1, '2024-01-25 12:28:32', '2024-01-25 12:28:32');
 
 -- --------------------------------------------------------
 
@@ -103,18 +102,6 @@ CREATE TABLE `expense` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `expense`
---
-
-INSERT INTO `expense` (`id`, `user_id`, `amount`, `date`, `category`, `method`, `remarks`, `created_at`, `updated_at`) VALUES
-(2, 2, 3000, '2024-01-12', NULL, 'UPI', NULL, '2024-01-20 16:30:26', '2024-01-20 16:30:26'),
-(3, 2, 20000, '2024-01-19', NULL, 'Cash', NULL, '2024-01-20 16:39:32', '2024-01-20 16:39:32'),
-(4, 2, 16000, '2023-12-31', 'Dummy', 'UPI', NULL, '2024-01-20 16:55:42', '2024-01-20 16:55:42'),
-(5, 3, 2.2, '2024-01-20', NULL, 'Cash', NULL, '2024-01-20 17:39:30', '2024-01-20 17:39:30'),
-(6, 3, 50, '2024-01-20', NULL, 'Cash', NULL, '2024-01-20 17:40:55', '2024-01-20 17:40:55'),
-(7, 1, 17000, '2024-01-21', 'Shopping', 'UPI', 'R.O.', '2024-01-22 10:05:30', '2024-01-22 10:05:30');
-
 -- --------------------------------------------------------
 
 --
@@ -133,14 +120,20 @@ CREATE TABLE `income` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `income`
+-- Table structure for table `notifications`
 --
 
-INSERT INTO `income` (`id`, `user_id`, `amount`, `date`, `category`, `method`, `remarks`, `created_at`, `updated_at`) VALUES
-(11, 2, 4000, '2024-01-10', 'Dummy', 'Cash', NULL, '2024-01-20 17:32:26', '2024-01-20 17:32:26'),
-(12, 3, 4.2, '2024-01-20', NULL, 'Cash', NULL, '2024-01-20 17:38:06', '2024-01-20 17:38:06'),
-(13, 1, 7000, '2024-01-22', 'Salary', 'Cash', NULL, '2024-01-22 09:52:49', '2024-01-22 09:52:49');
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -158,7 +151,7 @@ CREATE TABLE `users` (
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `session_id` varchar(255) DEFAULT NULL,
   `is_login` tinyint(4) NOT NULL DEFAULT 0,
-  `is_verified` tinyint(4) NOT NULL DEFAULT 0,
+  `is_verified` tinyint(4) NOT NULL DEFAULT 1,
   `multiple_login` tinyint(4) NOT NULL DEFAULT 0,
   `monthly_budget` int(11) DEFAULT NULL,
   `currency` varchar(10) DEFAULT NULL,
@@ -172,9 +165,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `uid`, `name`, `email`, `mobile`, `pwd`, `status`, `session_id`, `is_login`, `is_verified`, `multiple_login`, `monthly_budget`, `currency`, `notifications`, `created_at`, `updated_at`) VALUES
-(1, '0DOqQ4ZkLkXHI-afa62b594c170a47cba04b2cd341498f', 'Vinay', 'vinaywebguy@gmail.com', '7206881088', 'e10adc3949ba59abbe56e057f20f883e', 1, 'xeN5o1oBms', 0, 1, 1, 20000, '₹', 0, '2024-01-19 16:47:39', '2024-01-23 17:37:58'),
-(2, 'IPwYnLh6y5mGn-78dcdb77c86c42022ef7ad95f926e0d1', 'Ritu', 'ritu@gmail.com', '9896122012', 'e10adc3949ba59abbe56e057f20f883e', 1, 'hB7DYGUJqu', 0, 1, 0, 50000, '₹', 1, '2024-01-20 16:12:32', '2024-01-22 15:05:04'),
-(3, 'xYQ40f4Z95so4-1f9d9a9efc2f523b2f09629444632b5c', 'John', 'john@gmail.com', '64123001', 'e10adc3949ba59abbe56e057f20f883e', 1, 'Ax0XmTNzMa', 0, 1, 0, 60, '$', 1, '2024-01-20 17:34:13', '2024-01-22 10:10:30');
+(1, '1AAH4vBAYm858-afa62b594c170a47cba04b2cd341498f', 'Vinay', 'vinaywebguy@gmail.com', '7206881088', 'e10adc3949ba59abbe56e057f20f883e', 1, 's4JBQllWKT', 0, 1, 0, 40000, '₹', 1, '2024-01-25 12:21:02', '2024-01-25 12:21:53');
 
 --
 -- Indexes for dumped tables
@@ -205,6 +196,12 @@ ALTER TABLE `income`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -218,31 +215,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bb_club`
 --
 ALTER TABLE `bb_club`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `expense`
 --
 ALTER TABLE `expense`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

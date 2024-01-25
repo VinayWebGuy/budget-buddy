@@ -250,21 +250,37 @@ main section header .header-icons > div{
 .header-icon-box {
     position: absolute;
     width: 250px;
+    height: 340px;
     background-color: #fff;
     box-shadow: 0px 0px 4px  rgba(0, 0, 0, .7);
     top: 40px;
     right: 5px;
-    height: 330px;
     display: none;
     color: #000;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* overflow-y: auto; */
+    overflow: hidden;
 }
 .header-icon-box h4 {
     background: var(--clr1);
     color: #fff;
-    text-align: center;
-    padding: 8px 0;
+    /* text-align: center; */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.all-notifications {
+    height: 300px;
+    overflow-y: auto;
+}
+.all-notifications::-webkit-scrollbar {
+    display: none;
+}
+.no-notification {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .single-notificiation {
     padding: 4px 6px;
@@ -273,8 +289,11 @@ main section header .header-icons > div{
     margin: 10px 0;
     cursor: pointer;
 }
-.single-notificiation:hover {
-   font-weight: 600;
+.single-notificiation:hover span {
+   text-decoration: underline;
+}
+.single-notificiation i {
+    margin-right: 5px;
 }
 .header-icon-box .view-all {
     position: absolute;
@@ -538,6 +557,16 @@ a.inactive {
     display: flex;
     justify-content: center;
 }
+.row .pie-chart {
+    display: block;
+}
+.row .pie-chart:first-child {
+    margin-bottom: 80px;
+}
+.pie-chart h3 {
+    text-align: center;
+    margin: 8px 0;
+}
 .row {
     display: flex;
     gap: 20px;
@@ -570,6 +599,7 @@ a.inactive {
 }
 .dashboard-recent {
     margin-top: 85px;
+    margin-bottom: 30px;
 }
 .dashboard-recent > div {
     width: 100%;
@@ -582,6 +612,10 @@ a.inactive {
     color: #fff;
     text-align: center;
     display: block;
+}
+input:read-only {
+   cursor: not-allowed;
+   user-select: none;
 }
 
 
@@ -745,4 +779,12 @@ a.inactive {
 }
 .poppers.active {
     display: flex;
+}
+
+
+
+@media screen and (max-width: 999px) {
+    .row {
+        flex-wrap: wrap;
+    }
 }
